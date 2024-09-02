@@ -129,12 +129,17 @@ btnExam.addEventListener('click', () => {
 
 examCards.addEventListener("click", (event) => {
     const card = event.target.closest(".card");
+
+    if (!card || card.classList.contains("fade-out")) return;
+
     if (!click) {
         card.classList.add("correct");
         firstCard = card;
         firstCardIndex = currentWords.findIndex((item) => item.word === card.textContent || item.translate === card.textContent);
         click = true;
     } else {
+        if (card === firstCard) return;
+
         secondCard = card;
         secondCardIndex = currentWords.findIndex((item) => item.word === card.textContent || item.translate === card.textContent);
 
